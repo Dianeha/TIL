@@ -113,7 +113,7 @@ for url in urls:
   
   ★ Web 의 기본: 4개 키워드
   
-  요청은 '주소(url)'로 하고, '응답'은 '문서(html,xml,)'로 온다
+  ''주소(url)''로 ''요청'', ''문서(html,xml,)''로 ''응답''
   
   여기서의 문서는 WYSIWYG(what you see is what you get 위지위그)가 아님. 
   
@@ -163,9 +163,7 @@ headers = {'User-Agent': ':)'}
 
 response = requests.get(url, headers=headers).text
 text = bs4.BeautifulSoup(response, 'html.parser')
-# 페이지에스 F12 > copy > copy selector
 rows = text.select('.lst50')
-
 
 for row in rows:
     rank = row.select_one('td:nth-child(2) > div > span.rank').text
@@ -174,43 +172,4 @@ for row in rows:
     print(rank, title, artist)
 
 ```
-
-
-
-### File control
-
-- file_write(파일 만드는 법)
-
-```python
-# CSV 형식 excel viewer를 다운받음
-lunches = {
-    '양자강': '02-456-1256',
-    '김밥카페': '02-521-5555',
-    '순남시레기': '02-565-6547'
-}
-# lunch라는 파일 쓰기
-# 'w': write
-with open('lunch.csv', 'w', encoding='utf-8') as f:
-    f.write('식당이름, 전화번호\n')
-    for name, phone in lunches.items():
-        f.write(f'{name}, {phone}\n')
-
-```
-
-
-
-- file_read(파일 불러오는 법)
-
-```python
-import csv
-
-# 'r': read
-with open('lunch.csv', 'r', encoding='utf-8') as f:
-    items = csv.reader(f)
-    for item in items:
-        print(item)
-
-```
-
-
 
