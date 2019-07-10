@@ -89,49 +89,58 @@ git이 관리하는 폴더 > repo(sitory) 리포 라고 부른다 즉 카메라�
   
   
   
-  ### web 연습
+  ### web 스크래핑과 크롤링 연습
+  
+  - 웹 스크래핑(website scraping, 웹페이지에서 이름이나 이메일 주소 같은 데이터를 수집하는 것)
+  - **웹 크롤링**(Web Crawling)
+  
+  
+  
+  
   
   ● 연습1) 브라우저창 5개 한번에 띄우기
   
   ```python
   import webbrowser
-  
+
   urls = [
       'http://edu.ssafy.com',
-    'www.google.com',
+      'www.google.com',
       'https://github.com/Dianeha',
-    'https://2-ss3.slack.com/messages/CKWED8XAN/team/UL7PVL2VA/',
+      'https://2-ss3.slack.com/messages/CKWED8XAN/team/UL7PVL2VA/',
       'www.youtube.com'
-]
+  ]
   
-for url in urls:
-      webbrowser.open(url)
-
+  for url in urls:
+        webbrowser.open(url)
+  
   ```
 
   
-  
+
   ★ Web 의 기본: 4개 키워드
-  
-  ''주소(url)''로 ''요청'', ''문서(html,xml,)''로 ''응답''
-  
+
+  요청은 '주소(url)'로 하고, '응답'은 '문서(html,xml,)'로 온다
+
   여기서의 문서는 WYSIWYG(what you see is what you get 위지위그)가 아님. 
-  
+
   '페이지 소스 보기' 눌러서 나오는 것이 우리가 요청해서 응답받은, 다운받은 문서 > 우리가 보는 네이버 화면(정말 긴 2000줄짜리 html 한 장의 문서)이나 마크다운은 인간이 보는 문서모양.
-  
+
   따라서 문서 내용 수정이 가능하다. 
+
   
-  
-  
+
   #### web에서 status code
-  
+
   - [200] - ok
   - [404] - not found
-  
-  
-  
+
+
+
+
+
   ●  연습2) 네이버 금융에서 코스피지수 가져오기
-  
+
   ```python
   import requests
   import bs4
@@ -163,7 +172,9 @@ headers = {'User-Agent': ':)'}
 
 response = requests.get(url, headers=headers).text
 text = bs4.BeautifulSoup(response, 'html.parser')
+# 페이지에스 F12 > copy > copy selector
 rows = text.select('.lst50')
+
 
 for row in rows:
     rank = row.select_one('td:nth-child(2) > div > span.rank').text
@@ -172,4 +183,43 @@ for row in rows:
     print(rank, title, artist)
 
 ```
+
+
+
+### File control
+
+- file_write(파일 만드는 법)
+
+```python
+# CSV 형식 excel viewer를 다운받음
+lunches = {
+    '양자강': '02-456-1256',
+    '김밥카페': '02-521-5555',
+    '순남시레기': '02-565-6547'
+}
+# lunch라는 파일 쓰기
+# 'w': write
+with open('lunch.csv', 'w', encoding='utf-8') as f:
+    f.write('식당이름, 전화번호\n')
+    for name, phone in lunches.items():
+        f.write(f'{name}, {phone}\n')
+
+```
+
+
+
+- file_read(파일 불러오는 법)
+
+```python
+import csv
+
+# 'r': read
+with open('lunch.csv', 'r', encoding='utf-8') as f:
+    items = csv.reader(f)
+    for item in items:
+        print(item)
+
+```
+
+
 
