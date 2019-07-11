@@ -7,3 +7,7 @@ print(x)
 print(y)
 print(x > y)
 print(x < y)
+
+
+for i in range(4, 9):
+    print(i, end=' ')

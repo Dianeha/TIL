@@ -197,6 +197,7 @@ lunches = {
     '김밥카페': '02-521-5555',
     '순남시레기': '02-565-6547'
 }
+
 # lunch라는 파일 쓰기
 # 'w': write
 with open('lunch.csv', 'w', encoding='utf-8') as f:

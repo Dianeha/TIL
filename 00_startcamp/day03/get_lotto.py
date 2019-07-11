@@ -13,11 +13,12 @@ data = json.loads(response)
 
 
 real_n = []
-for key, value in data.items():  # 딕셔너리 data 중에 'drwtNo'가 들어간 부분만 추출해서 real_n 리스트에 추가
-    if 'drwtNo' in key:
-        real_n.append(value)
+for i in data:
+        print(i)  # 딕셔너리 data 중에 'drwtNo'가 들어간 부분만 추출해서 real_n 리스트에 추가
+#     if 'drwtNo' in key:
+#         real_n.append(value)
 
-print(real_n)
+# print(real_n)
 
 # real_n = []
 # for i in range(6):
