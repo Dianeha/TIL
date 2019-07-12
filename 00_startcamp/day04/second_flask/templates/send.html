@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+    p {
+        color:aqua
+    }
+
+    .code {
+        color: red        
+    }
+
+    #secret {
+        color:cadetblue
+    }
+    </style>
+
+    
+<head>
+    <meta charset="UTF-8">
+       <title>Send Message</title>
+</head>
+<body>
+    <h1>Send message here</h1>
+    <p>Good Morning</p>
+    <p class="code">hi</p>
+    <p class="code">hello</p>
+    <p class="code" id="secret">hi</p>
+    <p class="code">bye</p>
+    <p class="code">cool</p>
+    <form action="/receive">  <!--이 양식(form)의 목적지(url 주소)를 action뒤에 적음--> 
+        <input type="text" placeholder="message here" autofocus name="msg">  <!--form을 input받은 정보들로 채움-->
+        <input type="submit" value="보내기">
+    </form>
+</body>
+</html>

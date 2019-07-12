@@ -9,29 +9,37 @@ bonus = 6
 # my_n 과 real_n 의 숫자 3개가 같으면 5등
 # 나머지는 꽝
 
+
+# is_bonus = False
+# if bonus in my_n:
+#         is_bonus = True
+
 count = 0
 for i in my_n:
     for j in real_n:
         if i == j:
-            count = count + 1
-# print(count)
+            # count = count + 1
+            count += 1
 
-bonus_count = 0
-for i in my_n:
-    if i == bonus:
-        bonus_count = bonus_count + 1
+# 나의 방법
+# bonus_count = 0
+# for i in my_n:
+#     if i == bonus:
+#         bonus_count += 1
 # print(bonus_count)
 
 if count == 6:
-    print('축하드립니다. 당신은 로또 1등에 당첨되셨습니다!')
+    result = '1등'
 elif count == 5:
-    if bonus_count == 1:
-        print('축하드립니다. 당신은 로또 2등에 당첨되셨습니다!')
+    if bonus in my_n:
+        result = '2등'
     else:
-        print('축하드립니다. 당신은 로또 3등에 당첨되셨습니다!')
+        result = '3등'
 elif count == 4:
-    print('축하드립니다. 당신은 로또 4등에 당첨되셨습니다!')
+    result = '4등'
 elif count == 3:
-    print('축하드립니다. 당신은 로또 5등에 당첨되셨습니다!')
+    result = '5등'
 else:
-    print('다음 기회에 ... ')
+    result = '꽝'
+
+print(result)
