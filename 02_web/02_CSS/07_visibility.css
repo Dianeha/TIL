@@ -1,0 +1,22 @@
+.visible {
+    visibility: visible
+}
+
+.hidden {
+    visibility: hidden
+}
+
+.display-none {
+    /* display 속성이지만 비교해보자 */
+    display: none;
+}
+
+/* table 관련 css */
+table, td {
+    border:2px solid black;
+}
+
+/* collapse는 table에서만 사용, 해당부분(행, 열) 안보이게하기 가능 */
+.collapse {
+    visibility: collapse
+}

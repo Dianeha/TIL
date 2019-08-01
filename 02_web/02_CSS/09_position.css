@@ -1,0 +1,73 @@
+/* 
+    position의 default
+    위 => 아래, 왼 => 오
+    부모요소 <=> 자식요소 부모의 위치가 기준점
+    좌표값을 줘도 적용이 안됨..?
+
+    기본 포지션은 static
+
+*/
+
+
+.parent {
+    width: 150px;
+    height: 150px;
+    background-color: orange;
+    border: 1px solid gray;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+.static-box {
+    position: static;
+    background-color: salmon;
+    color: red;
+    text-align: center;
+    height: 150px;
+}
+
+.rel {
+    position: relative;
+}
+
+.relative-box {
+    /* 부모가 스태틱이면, 무시 ... body 기준으로 움직임 */
+    /* 부모가 relative이면, 부모기준으로 움직임 */
+    position: relative;
+    top: 50px; left: 50px;
+    background: skyblue;
+    text-align: center;
+    height: 150px;
+}
+
+.absolute-box {
+    position: absolute;
+    height: 200px; width: 200px;
+    top: 50px; left: 50px;
+    background-color: greenyellow;
+    text-align: center;
+}
+
+.fixed-box {
+    position: fixed;
+    color: darkgray;
+    text-align: center;
+    background: black;
+
+}
+
+.sidebar {
+    top: 0;
+    right: 0;
+    width: 15vw;
+    padding: 50% 10px;
+    z-index: 1; /* z는 숫자 조금이라도 더 큰게 앞으로 간다 */
+}
+
+.footer {
+    bottom: 0;
+    width: 100%;
+    background-color: violet;
+    height: 50px;
+
+}

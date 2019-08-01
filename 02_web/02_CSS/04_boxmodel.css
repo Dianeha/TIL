@@ -1,0 +1,24 @@
+div {
+    border: solid black 1px;
+    /* 시계방향으로 top right bottom left */
+    padding: 10px 1px 10px 10px;
+
+    /* 상하좌우 모두 10px */
+    margin: 10px; 
+}
+
+div.a {
+    /* 이 부분을 쓰지 않으면 위 div 속성을 상속받아 border: solid black 1px; */
+    border-style: dashed;
+    border-width: 3px
+    border-color: red;
+    
+    padding: 20px;
+
+    /* 두개를 쓰면 상하 좌우 */
+    margin: 50px 30px;
+}
+
+article.like-p {
+    margin: 1rem 0;
+}

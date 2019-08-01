@@ -99,9 +99,19 @@ print(lucky_numbers)
 
 #### 오늘 설치 프로그램 목록
 
-git bash 2.22.0-64-bit
-python 3.7.3
-vscode
+git bash 2.22.0-64-bit > https://git-scm.com/ > 우측에 모니터 화면에 Lastest source Release 2.22.0 Download 2.22.0 for windows
+python 3.7.3 > all release > 3.7.3 > [Windows x86-64 executable installer](https://www.python.org/ftp/python/3.7.3/python-3.7.3-amd64.exe) 다운로드
+
+- vscode > 설치할때 체크박스 5개 나오면 그 중에 2,3,5 체크 > 
+
+	1. 왼쪽에서 확장 누르고 'Korean 랭귀지 팩'이랑 Python 마이크로소프트에서 지원하는 별표붙은 것 설치
+ 	2. ctrl+백틱 > F1 누르고 > ter치면 > 기본쉘선택 > 깃배쉬 선택
+
+3. F1 누르고 Python selector interpretor 누르면 3.7.3 선택 > 하단 좌측에  ![1563162468750](C:\Users\student\AppData\Roaming\Typora\typora-user-images\1563162468750.png)
+
+4. 휴지통으로 끄고 ctrl+백틱
+5. 그 화면에서 python -V 해서 엔터쳐서 버전 정보 확인
+
 typora
 
 

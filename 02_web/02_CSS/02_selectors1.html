@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Selector 1</title>
+</head>
+<style>
+    h1, p, a {
+        color: red;
+    }
+
+    .pp {
+        color: orange;
+    }
+
+    a[href] {
+        color: green;
+    }
+
+    a[target="_blank"] {
+        color: black;
+        font-size: 20px;
+    }
+
+    /* 복수의 속성들 중 greeting이라는 속성을 가지고 있으면 작동, 이런것도 있구나 하기 */
+    h2[title~="greeting"] {
+        color: blueviolet
+    }
+
+    /* 모든 div(division)안에 있는 p(paragraph) 후손요소를 의미 */
+    div p {
+        font-size: 60px;
+    }
+
+    div > p { /* 정확히 div의 p 중 자식 요소 */
+        font-size: 40px;
+    }
+</style>
+<body>
+    <div>
+        <p>나는 div 자식</p>
+        <section>
+            <p>
+                나는 div 후손
+            </p>
+            <p>
+                나도 div 후손?
+            </p>
+        </section>
+        <p>
+            나도 div 자식?
+        </p>
+    </div>
+
+    <p>not me</p>
+
+    <h1>Hello</h1>
+    <p>Happy Hacking</p>
+    <p class="pp">SSAFY 2nd</p>
+
+    <a href="#">a</a>
+    <a href="#" target="_top">b</a>
+    <a href="#" target="_blank">c</a>
+    <a>d</a>
+
+    <h2 title="p greeting">hi</h2> <!-- p와 greeting이라는 복수의 속성값을 가진 것 -->
+    <h2 title="p-goodbye">bye</h2>
+    <h2 title="hello greeting">Wow</h2>
+</body>
+</html>

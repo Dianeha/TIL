@@ -20,6 +20,7 @@ for i in my_n:
         if i == j:
             # count = count + 1
             count += 1
+            break
 
 # 나의 방법
 # bonus_count = 0

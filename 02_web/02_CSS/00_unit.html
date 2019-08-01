@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        h1 {
+            font-size: 100%; /* 브라우저 기본 px/100 % */
+        }
+
+        p {
+            font-size: 1rem; /* 브라우저 기본폰트 사이즈 == 1 rem 으로 약속(절대값) */
+            color: #fff;
+            /* R G B */
+            /* range(256) */
+            /* ff ff ff */
+            color: rgba(255, 0, 0, 0.37); /* 마지막 인자는 투명도 */
+        }
+
+        div {
+            font-size: 100%;
+        }
+
+        div li {
+            font-size: 2em; /* 상속받은 div의 크기를 100%로 생각하고 그것의 두배(em은 상대값) */
+        }
+
+        /* em은 상속에서 부모의 사이즈를 100%로 (즉, 기준으로) 삼는 상대적인 값 */
+
+        div > div {
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <!-- 16px -->
+        aaaa
+        <div>
+            <!-- 16px * 0.8 -->
+            bbbb
+            <div>
+                <!-- 16px * 0.8 * 0.8 -->
+                cccc
+                <div>
+                    <!-- 16px * 0.8 * 0.8 * 0.8 -->
+                    dddd
+                </div>
+            </div>
+        </div>
+    </div>
+    <h1>This is my site</h1>
+    <div>
+        <h2>My cafe</h2>
+        <p>This is great cafe</p>
+        <ul>
+            <li>파스타</li>
+            <li>샐러드</li>
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+article:first-of-type {
+    background-color: red;
+}
+
+article:nth-of-type(2) {
+    background-color: green;
+}
+
+article:nth-last-of-type(2){
+    background-color: blue;
+}
+
+article:last-of-type {
+    background-color: black;
+}
+
+/* 첫번째 자식인데 까고 보니 p인 애를 선택*/
+p:first-child {
+    color: gold
+}
+
+/* 막내인데 까고보니 p였을 때 */
+p:last-child {
+    color: violet
+}
+/* 부모는 모르겠고 넷째인데 p였을 때*/
+p:nth-child(4) {
+    color: brown
+}
+
+/* 시험문제 내기 좋다 헷갈리기 때문에 */
+
+/* pseudo class selector */
+/* 상태에 따라 클래스를 바꾼다. */
+/* 형식) selector:가상-클래스 */
+
+a {
+    text-decoration: none;
+    color: black;
+    font-size: 50px;
+}
+
+a:hover {
+    color: orange;
+}
+
+/* 방문하지 않은 link */
+a:link {
+
+}
+
+/* 방문한 link */
+a:visited {
+    color: bisque;
+}
+
+input:focus {
+    background-color: black;
+    color: white;
+}

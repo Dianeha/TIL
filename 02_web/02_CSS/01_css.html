@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>CSS basic</title>
+    </head>
+    <style>
+        /* selecting 우선순위가 섞이지 않도록 하는 것이 꼬이지 않게 하는 방법 */
+        /* 스타일 적용 우선순위: !important(조커, 최우선) > inline css > [id(쓰지 않는다) > ★class★를 주로 사용할 것이다`] > tag > * 
+        > brower 기본세팅(크롬, 파이어폭스 등 브라우저마다 기본세팅이 다르기 때문에 다 바꿔야함) */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: red;
+        }
+
+        h2 {
+            color: pink !important;
+        }
+
+        /* .class명 */
+        .blue {
+            color: aquamarine
+        }
+
+        .big {
+            font-size: 100px
+        }
+
+        /* #id명 */
+        #green {
+            color: green
+        }
+
+        
+    </style>
+    <body>
+        <h1 class="big">Hello, SCC</h1>
+        <h2 id="green" class="blue">Selector</h2>
+        <h3 class="blue big">See how it works</h3> <!-- html에서는 나열할 때 ,를 사용하지 않는다. -->
+        
+
+    </body>
+</html>

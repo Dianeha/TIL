@@ -131,7 +131,8 @@ print(result)
 1. home화면(student)에 chatbot quest 폴더 새로 만들고 open code with 누름
 2. 처음에 감시카메라를 붙여줘야함 
 
-- touch .gitignore을 먼저
+- touch .gitignore을 먼저 한 후에
+- git init을 하기 >> 습관들이기
 
 하나의 프로젝트를 새로 만들 때
 
@@ -139,9 +140,9 @@ print(result)
 
 
 
+내봇이름은 mykindbot
 
-
-
+ss2s3Bot : username
 
 
 

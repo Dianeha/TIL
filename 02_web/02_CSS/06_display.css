@@ -1,0 +1,30 @@
+.aa {
+    background-color: coral;
+    padding: 20px;
+}
+
+.bb {
+    background-color: aqua;
+    width: 300px;
+    padding: 20px;
+}
+
+.xx {
+    width: 200px;
+}
+
+.big-lh {
+    line-height: 2em;
+}
+
+/* inline block 의 속성: inline과 block의 결합 */
+/* inline의 한줄 표시 + block의 margin, padding, width, height 가용가능
+    content 너비만큼 가로폭
+    display: in-line block 뒤에 공백은 space(4칸)
+    상하여백 margin 과 inline width, height로 가능
+
+
+*/
+.ib {
+    display: inline-block
+}

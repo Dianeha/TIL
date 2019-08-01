@@ -1,0 +1,22 @@
+div.rounded {
+    border-radius: 20px;
+
+    border: 1px solid blue;
+    width: 200px;
+    height: 220px;
+}
+
+div.a {
+    background-color: lightgray;
+    
+    /* width와 height는 content 영역을 지정하는 것 */
+    width: 300px;
+    height: 200px;
+    
+    padding: 25px;
+    border: 10px double blue;
+    margin: 15px;
+    
+    /* overflow hidden: 텍스트가 박스를 넘어버리면 숨긴다. */
+    overflow: hidden; 
+}
