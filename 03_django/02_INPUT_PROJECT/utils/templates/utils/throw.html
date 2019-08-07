@@ -1,0 +1,24 @@
+{% extends 'utils/base.html' %}
+
+{% block title %}DdayCount{% endblock %}
+{% block body %}
+    <h1>D-day Count</h1>
+    <p>Check how many days left Before specific event</p>
+    <form action="/utils/catch/" method="GET">        
+        <div>
+            <label for="from">From</label>
+            <input id="from" name="from" type="date">
+        </div><br><br>
+        
+        <div>
+            <label for="event-name">Event Name</label>
+            <input id="event-name" name="eventname" type="text" placeholder="ex) my birthday"><br>
+            <label for="event-date">Event Date</label>
+            <input id="event-date" name="event-date" type="date">
+        </div>
+
+        <div>
+            <input class="btn btn-dark" type="submit" value="Submit">
+        </div>
+    </form>
+{% endblock %}
