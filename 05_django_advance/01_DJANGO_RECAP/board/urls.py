@@ -14,8 +14,9 @@ urlpatterns = [ # 여기가 없으면 무조건 에러난다
     path('articles/<int:id>/', views.detail, name='detail'),
 
     # Create 글 쓰기(new) render html
-    # path('')
+    path('articles/new/', views.new, name='new'),
     # Create 글 DB저장(create)    
+    path('articles/create/', views.create, name='create'),
 
     # Update 글 수정쓰기(edit) render html
     # Update글 실제DB수정(update)
