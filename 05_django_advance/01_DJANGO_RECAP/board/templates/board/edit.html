@@ -1,18 +1,18 @@
 {% extends 'board/base.html' %}
-{% block title %}New article{% endblock title %}
+{% block title %}Edit article{% endblock title %}
 
 {% block body %}
-    <h1>New article</h1>
+    <h1>Edit article</h1>
     <!-- board앱에 create로 이 데이터를 form 봉투에 담아 보내겠다 -->
-    <form action="{% url 'board:create' %}" method="POST"> <!-- html 내놔 - get, 전달한 내용 DB 반영 - post -->
+    <form action="{% url 'board:update' article.id %}" method="POST"> <!-- html 내놔 - get, 전달한 내용 DB 반영 - post -->
         {% csrf_token %} <!-- 봉투 안에 보안토큰을 넣어 보낸다 -->
         <div>
             <label for="title">제목:</label>
-            <input id="title" name="title">
+            <input id="title" name="title" value="{{ article.title }}">
         </div>
         <div>
             <label for="content">내용:</label>
-            <textarea id="content" name="content" cols="30" rows="10"></textarea>
+            <textarea id="content" name="content" cols="30" rows="10">{{ article.content }}</textarea>
         </div>
         <div>
             <input type="submit" value="제출">

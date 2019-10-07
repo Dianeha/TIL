@@ -7,5 +7,35 @@
     <p>
         {{ article.content }}
     </p>
+    <div>
+        <a href="{% url 'board:edit' article.id %}">
+        <!-- <a href="/board/articles/{{article.id}}/edit -->
+            <button>Edit</button>
+        </a>
+    </div>
+    <div>
+        {% comment %} <a href="{% url 'board:delete' article.id %}">
+            <button>Delete</button>
+        </a> 
+        a 태그는 get 요청이라 DB 건드리는 delete에는 맞지 않다
+        {% endcomment %}
+        <form action="{% url 'board:delete' article.id %}" method="POST">
+            {% csrf_token %}
+            <input id = "delButton" type="submit" value="삭제" onclick="return confirm('정말로?')">
+        </form>
+    </div>
+    <div>
+        <a href="{% url 'board:list' %}">
+            <button>목록으로</button>
+        </a>
+    </div>
+
+    <script>
+        const delButton = document.querySelector('#delButton');
+        function popUp () {
+            return confirm('정말로?');
+        }
+        delButton.addEventListener('click', popUp);
+    </script>
 {% endblock %}
 

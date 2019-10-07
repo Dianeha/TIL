@@ -19,7 +19,10 @@ urlpatterns = [ # 여기가 없으면 무조건 에러난다
     path('articles/create/', views.create, name='create'),
 
     # Update 글 수정쓰기(edit) render html
+    path('articles/<int:id>/edit/', views.edit, name='edit'),
     # Update글 실제DB수정(update)
+    path('articles/<int:id>/update/', views.update, name='update'),
 
     # Delete 글 삭제(delete)
+    path('articles/<int:id>/delete/', views.delete, name='delete'),
 ]

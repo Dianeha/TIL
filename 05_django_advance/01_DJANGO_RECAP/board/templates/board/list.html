@@ -1,15 +1,20 @@
 {% extends 'board/base.html' %}
 
-{% block title %}Article list{% endblock %}
+{% block title %}Article list
+{% endblock %}
 
 {% block body %}
 <h1>This is Article list</h1>
+    <a href="{% url 'board:new' %}">
+        <button>New article</button>
+    </a>
+
 <ul>
     {% for article in articles %} <!-- [<A1>, <A2>, <A3>, ...] -->
         <li>
             <a href="{% url 'board:detail' article.id %}">{{ article.title }}</a>
         </li> <!-- <A1> -->
-    {% endfor %}    
+    {% endfor %}
 </ul>
 {% endblock %}
 
