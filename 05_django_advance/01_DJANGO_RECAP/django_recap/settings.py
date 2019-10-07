@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django_extensions', # 추가기능은 위쪽에 붙여나가자. 반드시 underbar_
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
