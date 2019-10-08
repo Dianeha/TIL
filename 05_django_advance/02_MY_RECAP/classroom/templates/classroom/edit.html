@@ -1,0 +1,29 @@
+{% extends 'classroom/base.html' %}
+
+{% block title %}EDIT STUDENT{% endblock title %}
+
+{% block body %}
+<h1>EDIT STUDENT {{ student.name }}'s INFO</h1>
+
+<form action="{% url 'classroom:update' student.id %}" method="POST">
+{% csrf_token %}
+    <div>
+        <label for="age">Age:   </label>
+        <input if="age" name="age" type="number" value="{{student.age}}">
+    </div>
+    <div>
+        <label for="major">Major: </label>
+        <input if="major" name="major" type="text" value="{{student.major}}">
+    </div>
+    <div>
+        <input type="submit" value="DONE">
+    </div>
+</form>
+
+<div>
+    <a href="{% url 'classroom:detail' student.id %}">
+        <button>CANCLE</button>
+    </a>
+</div>
+
+{% endblock body %}
