@@ -12,7 +12,9 @@
 <ul>
     {% for article in articles %} <!-- [<A1>, <A2>, <A3>, ...] -->
         <li>
-            <a href="{% url 'board:detail' article.id %}">{{ article.title }}</a>
+            <a href="{{ article.get_absolute_url }}">
+                {{ article.title }}
+            </a>
         </li> <!-- <A1> -->
     {% endfor %}
 </ul>

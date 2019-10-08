@@ -13,7 +13,7 @@
 </p>
 <div>
     <a href="{% url 'classroom:list' %}">
-        <button>BACK TO LIST◀</button>
+        <button>HOME<span>&#x1F3E1;</span></button>
     </a>
 </div>
 
@@ -29,5 +29,15 @@
         <input id = "delButton" type="submit" value="DELETE" onclick="return confirm('ARE YOU SURE?')">
     </form>
 </div>
+<br>
+<hr>
+<h3>Student list</h3>
+<ul>
+    {% for student in students %}
+        <li>
+            <a href="{% url 'classroom:detail' student.id %}">{{student.id}} {{student.name}}</a>
+        </li>
+    {% endfor %}
+</ul>
 
 {% endblock body %}

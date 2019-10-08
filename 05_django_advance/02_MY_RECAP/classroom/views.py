@@ -17,8 +17,10 @@ def list(request):
 @require_GET
 def detail(request, id):
     student = get_object_or_404(Student, id=id)
+    students = Student.objects.all()
     return render(request, 'classroom/detail.html', {
-        'student':student
+        'student':student,
+        'students':students
     })
 
 @require_GET
