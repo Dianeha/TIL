@@ -1,5 +1,5 @@
 from django import forms
-from .models import Article
+from .models import Article, Comment
 
 # forms.Form = > Data 입력 및 검증(유효성 검사)
 # forms.modelForm = > + HTML 생성까지 해줌
@@ -11,4 +11,11 @@ class ArticleModelForm(forms.ModelForm): # forms.ModelForm 를 상속받는 클�
     class Meta: # meta : 데이터에 대한 데이터 (사진, 사진 찍힌 시간, 위치, 사진의 크기 등)
         # 지금은 위 클래스에 대한 정보
         model = Article
+        fields = '__all__'
+
+class CommentModelForm(forms.ModelForm):
+    content = forms.CharField(min_length=2, max_length=200)
+
+    class Meta:
+        model = Comment
         fields = '__all__'

@@ -8,7 +8,7 @@
         {{ article.content }}
     </p>
     <div>
-        <a href="{% url 'board:edit' article.id %}">
+        <a href="{% url 'board:edit_article' article.id %}">
         <!-- <a href="/board/articles/{{article.id}}/edit -->
             <button>Edit</button>
         </a>
@@ -19,16 +19,34 @@
         </a> 
         a 태그는 get 요청이라 DB 건드리는 delete에는 맞지 않다
         {% endcomment %}
-        <form action="{% url 'board:delete' article.id %}" method="POST">
+        <form action="{% url 'board:delete_article' article.id %}" method="POST">
             {% csrf_token %}
             <input id = "delButton" type="submit" value="삭제" onclick="return confirm('정말로?')">
         </form>
     </div>
     <div>
-        <a href="{% url 'board:list' %}">
+        <a href="{% url 'board:article_list' %}">
             <button>목록으로</button>
         </a>
     </div>
+
+    <hr>
+    <p>[댓글목록]</p>
+    {% if comments %}
+        <ul>
+            {% for comment in comments %}
+                <li>{{ comment.content }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+<div>
+    <form action="{% url 'board:new_comment' article.id %}" method="POST">
+    {% csrf_token %}
+        <input name="comment_content" type="text">
+        <input type="submit">
+    </form>
+</div>
 
     <script>
         const delButton = document.querySelector('#delButton');

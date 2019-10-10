@@ -3,12 +3,12 @@ from django.views.decorators.http import require_GET, require_POST, require_http
 
 from IPython import embed
 
-from .forms import ArticleModelForm
-from .models import Article
+from .forms import ArticleModelForm, CommentModelForm
+from .models import Article, Comment
 
 # CRUD
 @require_http_methods(['GET', 'POST'])
-def new(request):
+def new_article(request):
     # 요청이 GET/POST 인지 확인한다
     # 만약 POST 라면
     if request.method == "POST":
@@ -20,7 +20,7 @@ def new(request):
             # 유효하다면 form을 저장한다       
             article = form.save()
             # 저장한 article로 redirect 한다        
-            return redirect(article) # return redirect('board:detail', article.id), models.py > 에 함수 만들어둠
+            return redirect(article) # return redirect('board:article_detail', article.id), models.py > 에 함수 만들어둠
         else:
             # 유효하지 않은 입력데이터를 담은 HTML과 에러메세리를 사용자에게 보여준다.
             return render(request, 'board/new.html', {
@@ -36,21 +36,24 @@ def new(request):
             'form':form
         })
 
-def list(request):
+def article_list(request):
     articles = Article.objects.all()
     return render(request, 'board/list.html', {
         'articles': articles,
     })
 
-def detail(request, id):
-    article = get_object_or_404(Article, id=id)
+def article_detail(request, article_id):
+    article = get_object_or_404(Article, id=article_id)
+    comments = article.comment_set.all().order_by('-id') #Comment.objects.filter(article_id=article.id)
+
     return render(request, 'board/detail.html', {
         'article': article,
+        'comments': comments,
     })
 
 @require_http_methods(['GET', 'POST'])
-def edit(request, id):
-    article = get_object_or_404(Article, id=id)
+def edit_article(request, article_id):
+    article = get_object_or_404(Article, id=article_id)
     if request.method == "POST":
         # form = ArticleModelForm(request.POST) 이렇게 쓰면 새종이에 데이터 쓰는 것이고 instance=article 하면 있는 데이터에 덮어써서 수정하는 것
         form = ArticleModelForm(request.POST, instance=article) # 사용자가 '새로 입력한 데이터'를 미리 만들어둔 case에 넣음
@@ -71,7 +74,16 @@ def edit(request, id):
     })
 
 @require_POST
-def delete(request, id):
-    article = get_object_or_404(Article, id=id)
+def delete_article(request, article_id):
+    article = get_object_or_404(Article, id=article_id)
     article.delete()
-    return redirect('board:list')
+    return redirect('board:article_list')
+
+@require_POST
+def new_comment(request, article_id):
+    article = get_object_or_404(Article, id=article_id)
+    comment = Comment()
+    comment.content = request.POST.get('comment_content')
+    comment.article_id = article.id
+    comment.save()
+    return redirect(article)
