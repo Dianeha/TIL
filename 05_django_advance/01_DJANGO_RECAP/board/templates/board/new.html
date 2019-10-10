@@ -3,11 +3,7 @@
 
 {% block body %}
 <h1>New article</h1>
-<form method="POST">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit">
-</form>
+{% include 'board/_form.html' %}
 
 {% endblock body %}
 
