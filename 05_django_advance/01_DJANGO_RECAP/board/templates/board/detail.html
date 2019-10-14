@@ -31,29 +31,7 @@
     </div>
 
     <hr>
-    <p>[댓글목록]</p>
-    {% if comments %}
-        <ul>
-            {% for comment in comments %}
-                <li>{{ comment.content }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-
-<div>
-    <form action="{% url 'board:new_comment' article.id %}" method="POST">
-    {% csrf_token %}
-        <input name="comment_content" type="text">
-        <input type="submit">
-    </form>
-</div>
-
-    <script>
-        const delButton = document.querySelector('#delButton');
-        function popUp () {
-            return confirm('정말로?');
-        }
-        delButton.addEventListener('click', popUp);
-    </script>
+    {% include 'board/_comment.html' %}
+    
 {% endblock %}
 

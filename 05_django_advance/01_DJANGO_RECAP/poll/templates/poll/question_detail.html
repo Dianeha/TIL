@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Menu Recommendation</title>
+</head>
+<body>
+    <h1>{{ question.title }}</h1>
+    {% comment %} <select name='Menu'>
+        <option value='' selected>-- 선택 --</option>
+        <option value='Korean'>한식</option>
+        <option value='Chinese'>중식</option>
+        <option value='Western'>양식</option>
+    </select> {% endcomment %}
+    <form method="POST" action="{% url 'poll:update_poll' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit">
+    </form>
+
+    <h3>현재 스코어</h3>
+    <ul>
+        {% for choice in choices %}
+            <li>{{ choice.content }} : {{ choice.votes }} 표</li>        
+        {% endfor %}
+        
+    </ul>
+</body>
+</html>

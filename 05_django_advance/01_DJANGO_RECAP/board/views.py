@@ -3,8 +3,24 @@ from django.views.decorators.http import require_GET, require_POST, require_http
 
 from IPython import embed
 
-from .forms import ArticleModelForm, CommentModelForm
+from .forms import ArticleModelForm, CommentModelForm, ArticleForm
 from .models import Article, Comment
+
+# Create Article with Form
+def new_article_with_form(request):
+    if request.method == 'POST':
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            article = Article()
+            article.title = form.cleaned_data.get('title')
+            article.content = form.cleaned_data.get('content')
+            article.save()
+            return redirect(article)
+    else:
+        form = ArticleForm()
+    return render(request, 'board/new.html', {
+        'form':form,
+    })
 
 # CRUD
 @require_http_methods(['GET', 'POST'])
@@ -44,11 +60,14 @@ def article_list(request):
 
 def article_detail(request, article_id):
     article = get_object_or_404(Article, id=article_id)
+    # 특정 id에 해당하는 article에 있는 comment를 모두 보여주고 역순으로 정렬해주세요
     comments = article.comment_set.all().order_by('-id') #Comment.objects.filter(article_id=article.id)
+    comment_form = CommentModelForm()
 
     return render(request, 'board/detail.html', {
         'article': article,
         'comments': comments,
+        'comment_form': comment_form,
     })
 
 @require_http_methods(['GET', 'POST'])
@@ -82,8 +101,35 @@ def delete_article(request, article_id):
 @require_POST
 def new_comment(request, article_id):
     article = get_object_or_404(Article, id=article_id)
-    comment = Comment()
-    comment.content = request.POST.get('comment_content')
-    comment.article_id = article.id
-    comment.save()
+    form = CommentModelForm(request.POST)
+    # embed()
+    if form.is_valid(): # new_article이랑 비교해보기
+        comment = form.save(commit=False) # 아직 미완성. forms에서 유효성 검사는 content만 했기 때문
+        # 아직 article_id 안들어옴
+        comment.article_id = article.id # 여기서 직접 해줌
+        comment.save()
     return redirect(article)
+
+@require_POST
+def delete_comment(request, article_id, comment_id):
+    # import time
+    # start = time.time()
+    
+    # 방법1 안정성 up / 효율 down
+    # article = get_object_or_404(Article, id=article_id)
+    # comment = get_object_or_404(Comment, id=comment_id)
+    # if comment in article.comment_set.all(): # > 여기서 전체 댓글수가 엄청 많으면 지불해야할 비용이 증가
+    #     comment.delete()
+
+    # 방법2 가성비 코드 - 안정성 down / 효율 up
+    # comment = get_object_or_404(Comment, id=comment_id)
+    # comment.delete() # DB에서 삭제
+    # end = time.time()
+    # print(end - start)
+
+    # 방법3
+    comment = get_object_or_404(Comment, id=comment_id, article_id=article_id)
+    comment.delete()
+
+    return redirect(comment.article) # 메모리에는 아직 남아있어서 comment.article 가능
+
