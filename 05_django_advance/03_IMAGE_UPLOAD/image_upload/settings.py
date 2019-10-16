@@ -30,14 +30,18 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+
 INSTALLED_APPS = [
+    'bootstrap4', # 설치: pip install django-bootstrap4 / 등록: bootstrap4
+    'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'sns'
+    'sns',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -118,4 +122,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static/' # 우리가 사용할 JS/css/images
+
+MEDIA_URL = '/media/' # 찾을 위치
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # 저장될 위치

@@ -16,7 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+#conf : configuration for Django. 
+from django.conf.urls.static import static
+from django.conf import settings # 마스터앱의 settings.py를 불러옴 왜? 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('sns/', include('sns.urls')),
+    path('newsfeed/', include('sns.urls')),
+    path('accounts/', include('accounts.urls')),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
