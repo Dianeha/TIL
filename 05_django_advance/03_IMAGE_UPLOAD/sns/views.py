@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_GET, require_POST
+from django.contrib.auth.decorators import login_required
 
 from .models import Posting, Comment
 from .forms import PostingModelForm, CommentModelForm
+
 
 @require_GET
 def posting_list(request):
@@ -11,6 +13,7 @@ def posting_list(request):
         'postings' : postings,
     })
 
+@login_required
 @require_GET
 def posting_detail(request, posting_id):
     posting = get_object_or_404(Posting, id=posting_id)
@@ -20,22 +23,28 @@ def posting_detail(request, posting_id):
         'comments': comments,
     })
 
+@login_required
 @require_POST
 def create_posting(request):
     form = PostingModelForm(request.POST, request.FILES) # 검증 & 저장 준비
     if form.is_valid(): # 검증!
-        posting = form.save() # 저장 => posting 객체 return
+        posting = form.save(commit=False) # 저장 => posting 객체 return
+        posting.user = request.user
+        posting.save()
         return redirect(posting) # detail엣 get_absolute_url 생성해둬서 가능
         # 원래는 redirect('sns/posting_detail' posting.id)
     else:
         return redirect('sns:posting_list') # render는 html를 보낼 때
 
+@login_required
 @require_POST
 def delete_posting(request, posting_id):
     posting = get_object_or_404(Posting, id=posting_id)
-    posting.delete()
+    if request.user == posting.user: # 요청보내는 사람과 포스팅 작성자가 다르면 삭제하지 못하도록
+        posting.delete()
     return redirect('sns:posting_list')
 
+@login_required
 @require_POST
 def create_comment(request, posting_id):
     posting = get_object_or_404(Posting, id=posting_id)
@@ -43,9 +52,11 @@ def create_comment(request, posting_id):
     if form.is_valid(): # content만 값 검증
         comment = form.save(commit=False)  # 아직 posting_id 가 비어있기 때문에, 저장하는 척만하고 comment를 리턴
         comment.posting = posting # comment.posting_id = posting.id 와 동일
+        comment.user = request.user
         comment.save()
     return redirect(posting)
 
+@login_required
 @require_POST
 def delete_comment(request, posting_id, comment_id):
     comment = get_object_or_404(Comment, id=comment_id, posting_id=posting_id)

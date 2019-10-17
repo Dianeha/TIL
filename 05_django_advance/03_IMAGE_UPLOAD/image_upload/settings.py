@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'bootstrap4', # 설치: pip install django-bootstrap4 / 등록: bootstrap4
     'django_extensions',
     'django.contrib.admin',
-    'django.contrib.auth',
+    'django.contrib.auth', # 인증
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',

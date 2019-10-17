@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.conf import settings # MASTER_APP/settings.py 임포트
 
 """
 $ python manage.py migrate <APP_NAME> zero
@@ -7,6 +8,7 @@ $ rm <APP_NAME>/migrations/0*
 """
 
 class Posting(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     content = models.TextField()
     icon = models.CharField(max_length=30, default='')
     # pip install pillow 해야지만 ImageField를 쓸 쑤 있다.
@@ -25,7 +27,8 @@ class Posting(models.Model):
     def __str__(self):
         return f'{self.pk}: {self.content[:20]}' # 20글자만 보이도록
 
-class Comment(models.Model):
+class Comment(models.Model):    
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     # related_name 이 없으면 posting.comment_set / 아래와 같다면 posting.comments.all()
     posting = models.ForeignKey(Posting, on_delete=models.CASCADE, related_name='comments')
     content = models.CharField(max_length=200)
