@@ -39,8 +39,9 @@ def new_article(request):
             return redirect(article) # return redirect('board:article_detail', article.id), models.py > 에 함수 만들어둠
         else:
             # 유효하지 않은 입력데이터를 담은 HTML과 에러메세리를 사용자에게 보여준다.
-            return render(request, 'board/new.html', {
-            'form':form
+            return render(request, 'board/form.html', {
+            'form':form,
+            'what':'New',
         })
 
     # GET이라면
@@ -48,8 +49,9 @@ def new_article(request):
         # 비어있는 form(HTML 생성기)을 만든다.
         form = ArticleModelForm()
         # form과 html을 사용자에게 보여준다
-        return render(request, 'board/new.html', {
-            'form':form
+        return render(request, 'board/form.html', {
+            'form':form,
+            'what':'New',
         })
 
 def article_list(request):
@@ -88,8 +90,9 @@ def edit_article(request, article_id):
     else:        
         form = ArticleModelForm(instance=article)
     # 위와 겹치므로 한칸 앞으로 가서 코드 간단히 해줌
-    return render(request, 'board/edit.html', {
-        'form':form
+    return render(request, 'board/form.html', {
+        'form':form,
+        'what':'Edit'
     })
 
 @require_POST

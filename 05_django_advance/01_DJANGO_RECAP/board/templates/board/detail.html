@@ -1,9 +1,13 @@
-{% extends 'board/base.html' %}
+{% extends 'base.html' %}
 
 {% block title %}Article detail{% endblock %}
 
 {% block body %}
     <h1>{{ article.title }}</h1>
+    <div>
+    <small>created : {{article.created_at}}</small>
+    <small>updated : {{article.updated_at}}</small>
+    </div>
     <p>
         {{ article.content }}
     </p>
