@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'bootstrap4',
     'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -57,7 +58,10 @@ ROOT_URLCONF = 'instagram.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            # BASE_DIR/APP/templates/ 는 자동으로 검색하는데
+            os.path.join(BASE_DIR, 'templates') # 여기도(BASE_DIR/templates/) 찾아봐주렴..
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,7 +129,10 @@ AUTH_USER_MODEL = 'accounts.User' # accounts 앱에 User 모델을 가져오겠�
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-
+    # BASE_DIR >> 프로젝트 최상단
+    # BASE_DIR/APP/static/ 은 자동으로 검색하는데
+    # 아래도 좀 봐줘
+    os.path.join(BASE_DIR, 'assets')
 ]
 
 MEDIA_URL = '/media/'
