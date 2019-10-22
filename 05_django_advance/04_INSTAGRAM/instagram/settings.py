@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'postings',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -114,11 +116,17 @@ USE_L10N = True
 
 USE_TZ = True
 
+# AUTH_USER_MODEL 직접 적지 않으면 저절로 auth 앱에 User 모델을 가져옴
+# User모델을 확장할 것이라면 커스터마이징 가능
+AUTH_USER_MODEL = 'accounts.User' # accounts 앱에 User 모델을 가져오겠다는 뜻
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+
+]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
