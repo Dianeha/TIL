@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 from django.conf import settings # MASTER_APP/settings.py 임포트
+from faker import Faker
+f = Faker()
 
 """
 $ python manage.py migrate <APP_NAME> zero
@@ -9,6 +11,11 @@ $ rm <APP_NAME>/migrations/0*
 
 class Posting(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    like_users = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name='like_postings',
+        blank=True
+    )
     content = models.TextField()
     icon = models.CharField(max_length=30, default='')
     # pip install pillow 해야지만 ImageField를 쓸 쑤 있다.
@@ -24,8 +31,18 @@ class Posting(models.Model):
         return reverse("sns:posting_detail", kwargs={"posting_id": self.pk})
 
 
-    def __str__(self):
-        return f'{self.pk}: {self.content[:20]}' # 20글자만 보이도록
+    # def __str__(self):
+    #     return f'{self.pk}: {self.content[:20]}'
+     # 20글자만 보이도록
+
+    @classmethod
+    def dummy(cls, n):        
+        for _ in range(n):
+            cls.objects.create(
+                user_id=1,
+                content=f.sentence(),
+                icon='fas fa-angrycreative',
+            )
 
 class Comment(models.Model):    
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -38,5 +55,15 @@ class Comment(models.Model):
     class Meta:
         ordering = ['created_at', ]
 
-    def __str__(self):
-        return f'{self.id}: {self.content[:10]}'
+    # def __str__(self):
+    #     return f'{self.id}: {self.content[:10]}'
+
+
+    @classmethod
+    def dummy(cls, n, posting_id):        
+        for _ in range(n):
+            cls.objects.create(
+                user_id=1,
+                posting_id=posting_id,
+                content=f.sentence(),
+            )

@@ -46,3 +46,21 @@ def logout(request):
     auth_logout(request)
     return redirect('/')
 
+@require_GET
+def user_page(request, user_id):
+    user_info = get_object_or_404(User, id=user_id)
+    return render(request, 'accounts/user_page.html', {
+        'user_info':user_info,
+    })
+
+# @require_POST
+def follow(request, user_id):
+    fan = request.user
+    star = get_object_or_404(User, id=user_id)
+
+    if fan != star:
+        if star.fans.filter(id=fan.id).exists():
+            star.fans.remove(fan)
+        else:
+            star.fans.add(fan)
+    return redirect(star)

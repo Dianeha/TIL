@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.decorators.http import require_GET, require_POST
+from django.views.decorators.http import require_GET, require_POST, require_http_methods
 from django.contrib.auth.decorators import login_required
 
 from .models import Posting, Comment
@@ -18,9 +18,14 @@ def posting_list(request):
 def posting_detail(request, posting_id):
     posting = get_object_or_404(Posting, id=posting_id)
     comments = posting.comments.all() # models.py 에서 related_name='comments'으로 설정해서 그렇다
+    if posting.like_users.filter(id=request.user.id).exists():
+        is_like = True
+    else:
+        is_like = False
     return render(request, 'sns/posting_detail.html', {
         'posting': posting,
         'comments': comments,
+        'is_like': is_like,
     })
 
 @login_required
@@ -62,3 +67,17 @@ def delete_comment(request, posting_id, comment_id):
     comment = get_object_or_404(Comment, id=comment_id, posting_id=posting_id)
     comment.delete()
     return redirect(comment.posting)
+
+@login_required # 로그인 상태에서만 좋아요 누를 수 있음
+@require_POST # DB에 영향을 줌
+def toggle_like(request, posting_id):
+    user = request.user
+    posting = get_object_or_404(Posting, id=posting_id)
+    # if user in posting.like_users.all()
+    # 좋아요가 100만개면 모든 좋아요 정보 다 불러와서 내가 찾는 좋아요가 있는지 확인 
+    # >> 메모리 낭비, 돈낭비
+    if posting.like_users.filter(id=user.id).exists():
+        posting.like_users.remove(user) # Delete
+    else:
+        posting.like_users.add(user) # Create
+    return redirect(posting)
