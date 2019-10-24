@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h1>Article 목록</h1>
+
+{% if articles %}
+    {% for article in articles %}
+    <a href="{% url 'articles:article_detail' article.id %}">
+        <h2>{{ article.user.username }}: {{ article.title }}</h2>
+    </a>
+    <p>{{ article.like_users.count }}명이 좋아합니다.</p>
+    <a href="{% url 'articles:like' article.id %}">
+        {% if request.user in article.like_users.all %}
+            좋아요 취소
+        {% else %}
+            좋아요
+        {% endif %}
+    </a>
+    <hr>
+    {% endfor %}
+{% endif %}
+    
+{% endblock %}
