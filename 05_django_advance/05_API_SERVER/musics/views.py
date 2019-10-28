@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view
 from django.shortcuts import get_object_or_404
 
 from .models import Artist, Music, Comment
-from .serializers import ArtistSerializer, MusicSerializer, ArtistDetailSerializer, CommentSerializer
+from .serializers import ArtistSerializer, MusicSerializer, ArtistDetailSerializer, CommentSerializer, MusicDetailSerializer
 
 from IPython import embed
 # 달라  써라    수정   삭제
@@ -45,14 +45,14 @@ def music_list(request):
 @api_view(['GET'])
 def music_detail(request, music_id):
     musics = get_object_or_404(Music, id=music_id)
-    ser = MusicSerializer(musics)
+    ser = MusicDetailSerializer(musics)
     return Response(ser.data)
 
 @api_view(['POST'])
-def create_comment(request, musics_id):
+def create_comment(request, music_id):
     music = get_object_or_404(Music, id=music_id)
 
-    ser = CommentSerializer(data=request.data)
+    ser = CommentSerializer(data=request.data) # request.POST vs request.data
     if ser.is_valid(raise_exception=True):
         ser.save(music_id=music.id) # 저장 완료
     return Response(ser.data) # 저장한 데이터

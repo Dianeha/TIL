@@ -21,3 +21,8 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ('id', 'content', 'music_id')
+
+class MusicDetailSerializer(MusicSerializer):
+    comments = CommentSerializer(source='comment_set', many=True)
+    class Meta(MusicSerializer.Meta):
+        fields = MusicSerializer.Meta.fields + ('comments', )

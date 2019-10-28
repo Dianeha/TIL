@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            width: 960px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hi</h1>
+    <p>0</p>
+    <button onclick="plus();">+</button>
+    <button onclick="minus();">-</button>
+
+    <script>
+        // One line Comment
+        /*
+            Multi line Comment
+        */
+        // alert('Welcome to JS')
+        buttons = document.querySelectorAll('button');
+        plusButton = buttons[0];
+        minusButton = buttons[1];
+        
+        number = document.querySelector('p').innerText;
+        
+        function plus () {
+            number = document.querySelector('p').innerText;
+            number = parseInt(number)+1;
+            document.querySelector('p').innerText = number;
+            console.log('1을 더한 결과 ' + number +' 이(가) 되었습니다.')            
+        }
+
+        function minus () {
+            number = document.querySelector('p').innerText;
+            number = parseInt(number)-1;
+            document.querySelector('p').innerText = number;
+            console.log(`1을 뺀 결과 ${number} 이(가) 되었습니다.`)     
+        }
+
+
+    </script>
+</body>
+</html>
