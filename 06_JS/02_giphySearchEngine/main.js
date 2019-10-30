@@ -10,7 +10,6 @@ const resultArea = document.querySelector('#js-result-area');
 
 button.addEventListener('click', () => {
     const inputValue = inputArea.value
-    resultArea.innerHTML = inputValue
     searchAndPush(inputValue);
 });
 
