@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Start</title>
+</head>
+<body>
+    <div id="app">
+        <!-- {{ 바로 data의 key로 접근하여 렌더링(화면에 표시) 가능 -->
+        <h1>{{ message }}</h1>
+        <p>{{ count }}</p>
+        <div>
+            <!-- 함수의 인자를 받아야 하면 ()쓰고 필요없으면 안써도 됨, app.methods.plus 안해도 자동으로 찾아감 -->
+            <button v-on:click="plus(3)">+</button> 
+            <button v-on:click="minus">-</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            // el: 어떤 HTML element(Node - DOM트리의 노드) 와 Mount(연동)
+            el: '#app',
+            // Vue instance 의 시작할 떄의 속성 값(=== 숫자, 문자, 배열 ...)
+            data: {
+                message: 'Hello, Vue',
+                count: 0,
+            },
+            // methods: 보통 data를 조작하는 함수. data가 바뀌면 무조건 re-rendering
+            methods: {
+                // 주의)) vue instance 안에서는 arrow function(() => {}) 금지 
+                plus: function (n) { this.count += n },
+                minus: function () { this.count-- },
+
+            },
+
+        });
+    </script>
+</body>
+</html>

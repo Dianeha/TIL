@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // JS Global 전역변수(var let const 안쓰고 변수에 값 할당)
+        glob1 = 1;
+        
+        for (t=0; t < 10; t++) {
+            glob2 = 11;
+        }
+
+        function qq() {
+            glob3 = 111;
+        }
+
+        // ES6+ let/const: block({}) scope : {} 바깥세상에서는 접근 불가
+        for (let x=0; x < 10; x++) {
+            let y = 100;
+        }
+        console.log(y, x);
+    </script>
+</body>
+</html>

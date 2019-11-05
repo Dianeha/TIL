@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>identicon</title>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <div>
+                <input type="text" v-model="user_input">
+            </div>
+            <div>
+                output
+                <div v-html="identicon"></div>
+            </div>
+        </div>        
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.rawgit.com/dmester/jdenticon/5bbdf8cb/dist/jdenticon.min.js"></script>
+
+    <script>
+        // jdenticon.toSvg('ssafy', 200) // (text, width)
+        /*
+        1. input의 value를 잡는다.
+        2. value를 jdenticon.toSvg('ssafy', 200)에 넣는다.
+        3. jdenticon.toSvg('ssafy', 200)의 리턴값을 화면에 보여준다.
+        */
+        const app = new Vue({
+            el: "#app",
+            data: {
+                user_input: '',
+                image: '',
+            },
+            methods: {},
+            computed: {
+                identicon () {
+                    return jdenticon.toSvg(this.user_input, 200);
+                }
+                //computed짜면, user_input이 바뀔때마다 return값이 달라지므로 
+                //input 태그 안에 v-on:keyup="identicon" 이 필요하지 않음
+            },
+            watch: {},
+            template:``
+
+        })
+    </script>
+</body>
+</html>

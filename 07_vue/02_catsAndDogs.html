@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cats & dogs</title>
+</head>
+<body>
+    <div id="app">
+        <button v-on:click="getCatImage">냐옹</button>
+        <button v-on:click="getDogImage">멍멍</button>
+        <span>냐용: {{ catCount }}</span>
+        <span>멍멍: {{ dogCount }}</span>
+
+        <div>
+            <img
+                v-for="image in imageUrls"
+                v-bind:src="image"
+                alt="animal-image"
+                width='100px'>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                // 맨 처음 app 이 load 되었을 때의 data
+                catCount: 0,
+                dogCount: 0,
+                imageUrls: [],
+            },
+
+            methods: {
+                getCatImage: function () {
+                    const URL = 'http://api.thecatapi.com/v1/images/search';
+                    axios.get(URL) // axios는 데이터가 도착하면 이미 parsing 해줌
+                        // fetch 일때는 .then(resJson => resJson.json()) // resJson은 문자열, resJson.json() 앞에 return 이 생략되어 있음
+                        .then(res => {
+                            this.imageUrls.push(res.data[0].url);
+                            this.catCount++;
+                        })
+                },
+                getDogImage: function () {
+                    const URL = 'https://dog.ceo/api/breeds/image/random';
+                    axios.get(URL)
+                        .then(res => {
+                            this.imageUrls.push(res.data.message);
+                            this.dogCount++;
+                        })
+                },
+            },
+        })
+    </script>
+</body>
+</html>
