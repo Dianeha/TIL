@@ -15,10 +15,10 @@ typeof 1.1;
 typeof Infinity;
 typeof NaN;
 
-// object
-typeof [1, 2];
+
+typeof [1, 2]; // object
 Array.isArray([1,2]) // true
-typeof {a:2, b:3};
+typeof {a:2, b:3}; // object
 
 typeof function(){}; //function
 

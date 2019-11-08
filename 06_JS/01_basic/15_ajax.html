@@ -13,11 +13,15 @@
     <button id="js-load-axios">Axios</button>
     
     <div id="js-content-area"></div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- 이렇게 해야 axios가 실행되고 난 상태에서 아래 코드들이 실행됨 -->
     <script>
         const url ='https://koreanjson.com';
         const btn1 = document.querySelector('#js-data-load-btn');
         const btn2 = document.querySelector('#js-load-fetch');
         const btn3 = document.querySelector('#js-load-axios');
+        const area = document.querySelector('#js-content-area');
         let postId = 1;
         btn1.addEventListener('click', () => {
             // AJAX: Asynchronous JavaScript and XML
@@ -32,12 +36,20 @@
             });
         })
 
-        // promise 함수, .then.then.then...... catch
+        // promise 함수, .then.then.then...... catch ★
         btn2.addEventListener('click', () => {
             fetch(`${url}/posts/${postId++}`)
                 .then(res => res.json()) // function2 참조
+                .then(data => {                    
+                    area.innerHTML += `<p>${data.title}</p>`
+                })
+                .catch(err => console.error(err));
+        })
+
+        btn3.addEventListener('click', () => {
+            axios.get(`${url}/posts/${postId++}`) // Promis
+                .then(res => res.data)
                 .then(data => {
-                    const area = document.querySelector('#js-content-area');
                     area.innerHTML += `<p>${data.title}</p>`
                 })
                 .catch(err => console.error(err));

@@ -12,9 +12,11 @@ numbers.pop()
 numbers.unshift('a') // 앞에 넣기 queue처럼
 numbers.shift(); // 앞에서 빼기 return 'a'
 
-// 원본 유지 methods
+// 원본 그대로 methods
 numbers.includes(1) // True
 numbers.indexOf(1) // 0
+numbers.indexOf(100) // 없는 값의 index를 가져오라하면 -1을 줌
+
 numbers.join() // "1,2,3" string
 numbers.join('') // "123"
 numbers.join('-') // "1-2-3"
