@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 
-Vue.use(VueRouter)  // middleware >> 우리같이 일해보자. 계약서 도장 찍음.
+Vue.use(VueRouter)  // middleware  등록 >> 우리같이 일해보자. 계약서 도장 찍음.
 
 
 const router = new VueRouter({

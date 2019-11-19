@@ -38,16 +38,17 @@
 </template>
 
 <script>
+import router from '../router'; // '../router/index.js' 의 줄임
 const axios = require('axios');
+
 export default {
   name: "LoginForm",
   data() {
     return {
       // 1. id/password 에 해당하는 data
       credentials: {
-        // username: null,
-        // password: null, 안써도 credentials 만 초기화 되어 있으면
-        // 위 템플릿에서 v-model="credentials.username" 해도 만들어서 찾아들어감.
+        username: '',
+        password: '',
       },
       isAuthenticated: false, // 인증여부
       isLoading: false,
@@ -60,9 +61,26 @@ export default {
 
         if (this.checkUserInput()) {
             console.log('django 서버로 데이터를 보냅니다.');
-            axios.get('http://localhost:8000', this.credentials)
-                .then(res => console.log(res))
-                .catch(err => console.error(err));
+            axios.post('http://localhost:8000/api-token-auth/', this.credentials)
+                .then(res => {
+                  this.isLoading = false;
+                  console.log(res.data.token);
+                  this.$session.start(); // sessionStorage.session-id: sess: + Date.now()
+                  this.$session.set('jwt', res.data.token);
+                  router.push('/');
+                })
+                .catch(err => {
+                  if (!err.response) { // no response >> 서버 꺼졌을 때
+                    this.errors.push('Network Error...')
+                  } else if (err.response.status === 400) {
+                    this.errors.push('Invalid username or password');
+                  } else if (err.response.status === 500) {
+                    this.errors.push('Internal Server error. Please try again later.');
+                  } else {
+                    this.errors.push('Some error occured');
+                  }
+                  this.isLoading = false;
+                });
         } else {
             console.log('검증 실패. 다시 작성하세요!')
             this.isLoading = false;
