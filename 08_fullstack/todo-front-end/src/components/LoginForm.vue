@@ -67,6 +67,10 @@ export default {
                   console.log(res.data.token);
                   this.$session.start(); // sessionStorage.session-id: sess: + Date.now()
                   this.$session.set('jwt', res.data.token);
+                  
+                  // dispatch => action 실행하는 메서드 (어느 컴포넌트에 있든지 간에 auth에 있는 login 함수를 실행)
+                  this.$store.dispatch('login', res.data.token);
+
                   router.push('/');
                 })
                 .catch(err => {
