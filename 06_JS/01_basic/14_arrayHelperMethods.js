@@ -9,7 +9,7 @@ for (var i=0; i < colors.length; i++) {
 
 // ES6+
 
-// forEach 는 return이 없다
+// 1. forEach 는 return이 없다
 // 1. 
 function logger(x) {
     console.log(x)
@@ -23,7 +23,7 @@ colors.forEach(function logger(x) {
 })
 
 // ======================================================
-// Map
+// 2. Map
 // python 에 map(int, iter) 와 비슷한 역할
 
 // ES5
@@ -50,7 +50,7 @@ console.log(tripleNumbers)
 
 // ======================================================
 
-// filter 함수 : 
+// 3. filter 함수 : 
 // callbackFunction의 조건에 해당하는 모든 요소가 있는 배열을 새로 생성
 
 

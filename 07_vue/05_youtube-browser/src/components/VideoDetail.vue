@@ -10,8 +10,7 @@
                 <p>{{ video.snippet.description }}</p>
             </div>
         </div>
-    </div>
-    
+    </div>    
 </template>
 
 <script>
