@@ -8,6 +8,7 @@ response = requests.get(url).text
 text = bs4.BeautifulSoup(response, 'html.parser')
 # 네이버 금융 시세 코드들 중에서 특정부분만 빼내서 kospi 박스에 넣음
 exchange_rate = text.select_one('#exchangeList > li.on > a.head.usd > div > span.value')
-ex_rate = float(exchange_rate.text)
+# ex_rate = float(exchange_rate.text)
 
-print(type(ex_rate))
+# print(type(ex_rate))
+print(exchange_rate)
