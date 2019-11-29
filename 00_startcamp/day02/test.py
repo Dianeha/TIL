@@ -8,7 +8,7 @@ today = datetime.today().strftime('%Y%m%d')
 
 writer = csv.writer(open('movie50.csv', 'w', encoding='utf-8', newline=''))
 writer.writerow(['MovieCd', 'movieName', 'movieNameE', 'filmRatings', 'pubDate', 'runtime', 'genre', 'director', 'userRating', 'audience', 'poster_url', 'description'])
-# 영화         대표코드(네이버),영화명(국문),영화명(영문), 관람등급,      개봉연도,   상영시간,   장르,      감독,     실관람객평점, '누적관람객',  포스터,     '줄거리'
+# 영화          대표코드(네이버),영화명(국문),영화명(영문),   관람등급,      개봉연도,   상영시간,   장르,      감독,     실관람객평점,   '누적관람객',  포스터,     '줄거리'
 
 # 최근상영영화 중 평점 높은 50개
 url = f'https://movie.naver.com/movie/sdb/rank/rmovie.nhn?sel=cur&date={today}'
