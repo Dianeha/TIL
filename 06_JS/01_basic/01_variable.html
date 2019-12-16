@@ -14,12 +14,14 @@
         let word = '왜안되';
         word = '왜안돼';
 
-        // ★ 상수: 기본적으로 상수로 선언
+        // ★ 상수: 기본적으로 상수로 선언, 대문자와 밑줄 사용
         // ES5: 없음
         // ES6+
-        const name = '하다연';
+        const ROOM_TEMP_C = 21.5, MAX_TEMP_C = 30;
+        console.log(ROOM_TEMP_C)
         // 상수: 한번 할당하면, 재 할당(= 기호를 쓴다.) 불가.
-        name = '하재원'; // X
+        ROOM_TEMP_C = '하재원'; // X
+        console.log(ROOM_TEMP_C)
     </script>
 </body>
 </html>

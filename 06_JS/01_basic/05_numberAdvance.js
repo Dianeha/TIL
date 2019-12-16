@@ -10,3 +10,4 @@ Infinity - Infinity // NaN
 'asdf' + 1 // 덧셈이 아니라 string concat : 'asdf1'
 'asdf' - 1 // NaN
 'asdf' * 1 // NaN
+console.log("\tDon't ask me!\"")
