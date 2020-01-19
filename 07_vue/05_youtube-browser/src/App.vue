@@ -55,7 +55,9 @@
                         q: inputValue,
                     }
                 })
-                .then(res => this.videos = res.data.items) // this.videos 처럼 바로접근
+                .then(res => {
+                    this.videos = res.data.items // this.videos 처럼 바로접근
+                })
             },
             onVideoSelect(video) {
                 this.selectedVideo = video;

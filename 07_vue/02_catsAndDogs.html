@@ -1,23 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>cats & dogs</title>
 </head>
+
 <body>
     <div id="app">
-        <button v-on:click="getCatImage">냐옹</button>
-        <button v-on:click="getDogImage">멍멍</button>
+        <h2>total "{{ catCount + dogCount }}" cats and dogs</h2>
+        
         <span>냐용: {{ catCount }}</span>
-        <span>멍멍: {{ dogCount }}</span>
-
+        <button v-on:click="getCatImage">냐옹 + </button>
+        <button v-on:click="removeCatImage">냐옹 - </button>
         <div>
-            <img
-                v-for="image in imageUrls"
-                v-bind:src="image"
-                alt="animal-image"
-                width='100px'>
+            <img v-for="image in imageUrls[0]" v-bind:src="image" alt="animal-image" width='100px'>
         </div>
+
+        <hr>
+        
+        <span>멍멍: {{ dogCount }}</span>
+        <button v-on:click="getDogImage">멍멍 +</button>
+        <button v-on:click="removeDogImage">멍멍 -</button>
+        <div>
+            <img v-for="image in imageUrls[1]" v-bind:src="image" alt="animal-image" width='100px'>
+        </div>
+
+
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -28,7 +37,7 @@
                 // 맨 처음 app 이 load 되었을 때의 data
                 catCount: 0,
                 dogCount: 0,
-                imageUrls: [],
+                imageUrls: [[], []],
             },
 
             methods: {
@@ -37,20 +46,41 @@
                     axios.get(URL) // axios는 데이터가 도착하면 이미 parsing 해줌
                         // fetch 일때는 .then(resJson => resJson.json()) // resJson은 문자열, resJson.json() 앞에 return 이 생략되어 있음
                         .then(res => {
-                            this.imageUrls.push(res.data[0].url);
+                            this.imageUrls[0].push(res.data[0].url); // imageUrls 라는 배열에 push(안에 있는걸 집어넣는다.)
                             this.catCount++;
                         })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                },
+                removeCatImage: function() {
+                    if (this.imageUrls[0].length != 0) {
+                        this.imageUrls[0].pop();
+                        this.catCount--;
+                    } else {
+                        console.log('NO')
+                    }
+                    
                 },
                 getDogImage: function () {
                     const URL = 'https://dog.ceo/api/breeds/image/random';
                     axios.get(URL)
                         .then(res => {
-                            this.imageUrls.push(res.data.message);
+                            this.imageUrls[1].push(res.data.message);
                             this.dogCount++;
                         })
                 },
+                removeDogImage: function() {
+                    if (this.imageUrls[1].length != 0) {
+                        this.imageUrls[1].pop();
+                        this.dogCount--;
+                    } else {
+                        console.log('NO')
+                    }
+                }
             },
         })
     </script>
 </body>
+
 </html>
